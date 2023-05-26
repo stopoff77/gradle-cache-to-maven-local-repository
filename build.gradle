@@ -1,0 +1,66 @@
+plugins {
+    id "org.springframework.boot"        version "${springBootVersion}"
+    id "io.spring.dependency-management" version "${springDependencyManagementVersion}"
+    id "java"
+}
+
+group   = "${projectGroup}"
+version = "${projectVersion}"
+sourceCompatibility = "${javaSource}"
+targetCompatibility = "${javaTarget}"
+[compileJava, compileTestJava]*.options*.encoding = "${javaEncoding}"
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // no need dependencies
+}
+
+
+ext {
+    println "${gradleCachePath}"
+    println "${toDirectory}"
+
+    gradleCachePath = "${gradleCachePath}"
+    toDirectory     = "${toDirectory}"
+
+    println gradleCachePath
+    println toDirectory
+
+    println "${gradleCachePath}"
+    println "${toDirectory}"
+}
+
+tasks.jar {
+    enabled = true
+    archiveFileName = "${deployFileName}"
+}
+
+// boot jar로 하면 dependency 오류 남
+tasks.bootJar {
+    enabled = false
+}
+
+/** gradle cache to maven local repository 
+ * 실행 옵션 - gradle clean cacheToMavenLocal
+*/
+tasks.register("cacheToMavenLocal", Copy) {
+    duplicatesStrategy = DuplicatesStrategy.WARN
+
+    from new File(gradle.gradleUserHomeDir, "${gradleCachePath}")
+    //into repositories.mavenLocal().url // C:\Users\사용자명\.m2\repository
+    into "${toDirectory}"
+    eachFile {
+        List<String> parts = it.path.split("/")
+        it.path = (parts[0]+ "/" + parts[1]).replace(".","/") + "/" + parts[2] + "/" + parts[4]
+    }
+    includeEmptyDirs false
+}
