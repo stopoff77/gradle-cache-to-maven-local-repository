@@ -3,6 +3,6 @@
 gradle cache to maven local repository
 <br/>
 <br/>
-<a href="https://zzangjava.tistory.com/919" target="_blank">https://zzangjava.tistory.com/919</a>
+[https://zzangjava.tistory.com/919](https://zzangjava.tistory.com/919)
 <br/>
 <br/>
