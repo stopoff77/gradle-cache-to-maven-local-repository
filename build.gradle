@@ -60,15 +60,17 @@ tasks.register("cacheToMavenLocal", Copy) {
     into "${toDirectory}"
     //into repositories.mavenLocal().url // C:\Users\사용자명\.m2\repository
     
-    def index = 0
+    int index = 0
     eachFile {
         List<String> parts = it.path.split("/")
         it.path = (parts[0]+ "/" + parts[1]).replace(".","/") + "/" + parts[2] + "/" + parts[4]
 
-        index += 1
+        index++
+    }
+
+    doLast {
         println "total : " + index
     }
-    println "total : " + index
 
     includeEmptyDirs false
 }
