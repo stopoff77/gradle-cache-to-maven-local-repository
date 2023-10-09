@@ -26,17 +26,7 @@ dependencies {
 
 
 ext {
-    println "${gradleCachePath}"
-    println "${toDirectory}"
 
-    gradleCachePath = "${gradleCachePath}"
-    toDirectory     = "${toDirectory}"
-
-    println gradleCachePath
-    println toDirectory
-
-    println "${gradleCachePath}"
-    println "${toDirectory}"
 }
 
 tasks.jar {
@@ -56,10 +46,10 @@ tasks.register("cacheToMavenLocal", Copy) {
     duplicatesStrategy = DuplicatesStrategy.WARN
 
     //from new File(gradle.gradleUserHomeDir, "${gradleCachePath}")
-    from new File("H:/zRepositoryForGradle", "${gradleCachePath}")
+    from new File("${gradleCacheHome}", "${gradleCachePath}")
     into "${toDirectory}"
     //into repositories.mavenLocal().url // C:\Users\사용자명\.m2\repository
-    
+
     int index = 0
     eachFile {
         List<String> parts = it.path.split("/")
@@ -68,9 +58,9 @@ tasks.register("cacheToMavenLocal", Copy) {
         index++
     }
 
+    includeEmptyDirs false
+
     doLast {
         println "total : " + index
     }
-
-    includeEmptyDirs false
 }
