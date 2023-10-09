@@ -55,12 +55,20 @@ tasks.bootJar {
 tasks.register("cacheToMavenLocal", Copy) {
     duplicatesStrategy = DuplicatesStrategy.WARN
 
-    from new File(gradle.gradleUserHomeDir, "${gradleCachePath}")
-    //into repositories.mavenLocal().url // C:\Users\사용자명\.m2\repository
+    //from new File(gradle.gradleUserHomeDir, "${gradleCachePath}")
+    from new File("H:/zRepositoryForGradle", "${gradleCachePath}")
     into "${toDirectory}"
+    //into repositories.mavenLocal().url // C:\Users\사용자명\.m2\repository
+    
+    def index = 0
     eachFile {
         List<String> parts = it.path.split("/")
         it.path = (parts[0]+ "/" + parts[1]).replace(".","/") + "/" + parts[2] + "/" + parts[4]
+
+        index += 1
+        println "total : " + index
     }
+    println "total : " + index
+
     includeEmptyDirs false
 }
