@@ -1,7 +1,7 @@
 plugins {
-    id "org.springframework.boot"        version "${springBootVersion}"
-    id "io.spring.dependency-management" version "${springDependencyManagementVersion}"
-    id "java"
+    id 'org.springframework.boot'        version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+    id 'java'
 }
 
 group   = "${projectGroup}"
@@ -52,8 +52,8 @@ tasks.register("cacheToMavenLocal", Copy) {
 
     int index = 0
     eachFile {
-        List<String> parts = it.path.split("/")
-        it.path = (parts[0]+ "/" + parts[1]).replace(".","/") + "/" + parts[2] + "/" + parts[4]
+        List<String> parts = it.path.split('/')
+        it.path = (parts[0]+ '/' + parts[1]).replace('.','/') + '/' + parts[2] + '/' + parts[4]
 
         index++
     }
@@ -61,6 +61,6 @@ tasks.register("cacheToMavenLocal", Copy) {
     includeEmptyDirs false
 
     doLast {
-        println "total : " + index
+        println 'total : ' + index
     }
 }
