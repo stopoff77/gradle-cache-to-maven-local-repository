@@ -43,7 +43,8 @@ tasks.bootJar {
  * 실행 옵션 - gradle clean cacheToMavenLocal
 */
 tasks.register("cacheToMavenLocal", Copy) {
-    duplicatesStrategy = DuplicatesStrategy.WARN
+    duplicatesStrategy(DuplicatesStrategy.WARN)
+    //duplicatesStrategy = DuplicatesStrategy.WARN
 
     //from new File(gradle.gradleUserHomeDir, "${gradleCachePath}")
     from new File("${gradleCacheHome}", "${gradleCachePath}")
