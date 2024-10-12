@@ -6,8 +6,8 @@ plugins {
 
 group   = "${projectGroup}"
 version = "${projectVersion}"
-sourceCompatibility = "${javaSource}"
-targetCompatibility = "${javaTarget}"
+sourceCompatibility = "${javaVersion}"
+targetCompatibility = "${javaVersion}"
 [compileJava, compileTestJava]*.options*.encoding = "${javaEncoding}"
 
 configurations {
